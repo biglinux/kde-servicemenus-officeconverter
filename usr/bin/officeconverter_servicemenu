@@ -1,0 +1,847 @@
+#!/bin/bash
+#
+# 	Part of DoAllWithPDF_servicemenu version 1.2.0
+# 	Copyright (C) 2015 Mathieu PICOT <picotmathieu@gmail.com>
+#
+# 	This program is free software: you can redistribute it and/or modify
+# 	it under the terms of the GNU General Public License as published by
+# 	the Free Software Foundation, either version 3 of the License, or
+# 	(at your option) any later version.
+#
+# 	This program is distributed in the hope that it will be useful,
+# 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+# 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# 	GNU General Public License for more details.
+#
+# 	You should have received a copy of the GNU General Public License
+# 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+
+#### languages strings messages #################
+# Syntax for strings name is: msg_[$action]_$window_[$section]
+# For languages as sr@Latn use srLatn
+
+load_language(){
+#$1:$lang (2 letters)
+case "$1" in
+  en )
+    #dependencies
+    msg_depend_title="dependencies error"
+    msg_depend_libreoffice="libreoffice is needed. Please install libreoffice-common"
+    
+    #Terminal Name and first echo
+    msg_term_title_PDF="PDF conversion"
+    msg_first_echo_PDF="PDF conversion of :"
+    msg_term_title_odt="ODT Conversion"
+    msg_first_echo_odt="OpenDocument text conversion of :"
+    msg_term_title_docx="Docx Conversion"
+    msg_first_echo_docx="Word document conversion of :"
+    msg_term_title_ods="ODS Conversion"
+    msg_first_echo_ods="OpenDocument sheet conversion of :"
+    msg_term_title_xlsx="Xlsx Conversion"
+    msg_first_echo_xlsx="Excel sheet conversion of :"
+    msg_term_title_odp="ODP Conversion"
+    msg_first_echo_odp="OpenDocument presentation conversion of :"
+    msg_term_title_pptx="Pptx Conversion"
+    msg_first_echo_pptx="PowerPoint presentation conversion of :"
+    msg_term_title_txt="TXT Conversion"
+    msg_first_echo_txt="Simple text conversion of :"
+    msg_term_title_csv="CSV Conversion"
+    msg_first_echo_csv="CSV file conversion of :"
+    msg_term_title_html="HTML conversion"
+    msg_first_echo_html="HTML conversion of :"
+    
+    msg_term_conversion='conversion'
+    msg_term_from='    from :'
+    msg_term_to__='      to :'
+    
+    
+    #Notification title
+    msg_new_pdfdoc_one="New PDF document :"
+    msg_new_pdfdoc_many="New PDF documents :"
+    msg_new_pdfdoc_newdir(){
+    echo "$1 New PDF documents in :"
+    }
+    
+    
+    
+    msg_new_html_one="New HTML file :"
+    msg_new_html_many="New HTML files :"
+    msg_new_txt_one="New text file :"
+    msg_new_txt_many="New text files :"
+    msg_new_odt_one="new ODT document :"
+    msg_new_odt_many="new ODT documents :"
+    msg_new_docx_one="new Word document :"
+    msg_new_docx_many="new Word documents :"
+    msg_new_ods_one="new ODS sheet :"
+    msg_new_ods_many="new ODS sheets  :"
+    msg_new_xlsx_one="new Excel sheet :"
+    msg_new_xlsx_many="new Excel sheets :"
+    msg_new_odp_one="new ODP presentation :"
+    msg_new_odp_many="new ODP presentations :"
+    msg_new_pptx_one="new PowerPoint presentation :"
+    msg_new_pptx_many="new PowerPoint presentations :"
+    msg_new_csv_one="new CSV file :"
+    msg_new_csv_many="new CSV files :"
+    msg_new_print="Printing : "
+    
+    msg_notification_error_title="Errors on files"
+    msg_notification_error="Fail to create files :"
+    
+    #Name for Command at the top right of each dialog box
+    msg_command="Command"
+    msg_commands="Commands"
+    
+    #Progress_Title
+    msg_progress_PDF_title="PDF conversion"
+    
+    #commons to many windows
+    msg_choose_folder="Choose the folder for the new files"
+    msg_wrong_fields="You entered incorrect fields, repeat !"
+    msg_wrong_fields_title="Incorrects fields"
+    msg_processing_file="processing file"
+    msg_terminal_error="There were errors, press a button to close the terminal"
+    
+    
+    #outputFileNameIt;outputFileNameIt_convert
+    msg_outFile_saveFile_title="Save file ..."
+    msg_outFile_unwritable_dir(){
+    echo "$1 isn't writable, repeat !" 
+    }
+    msg_outFile_unwritable_dir_title="Permissions Error"
+    msg_outFile_sameInOut="Output file can't be the same one as input file. 
+Try again !"
+    msg_outFile_sameInOut_title="Same File !"
+    msg_outFile_existingFile(){
+    echo "\"$1\" already exists. 
+Do you want to overwrite it ?"
+    }
+    msg_outFile_existingFile_title="Existing File"
+  ;;
+  fr )
+
+  #dependencies
+  msg_depend_title="Erreur de dépendances"
+  msg_depend_libreoffice="libreoffice est réquis. Installez d'abord libreoffice-common"
+  
+  
+  #Titre de la konsole et premier echo
+  msg_term_title_PDF="Conversion en PDF"
+  msg_first_echo_PDF="Conversion en PDF de :"
+  msg_term_title_odt="Conversion en ODT"
+  msg_first_echo_odt="Conversion en texte OpenDocument de :"
+  msg_term_title_docx="Conversion en docx"
+  msg_first_echo_docx="Conversion en document Word de :"
+  msg_term_title_ods="Conversion en ODS"
+  msg_first_echo_ods="Conversion en tableur OpenDocument de :"
+  msg_term_title_xlsx="Conversion en xlsx"
+  msg_first_echo_xlsx="Conversion en document Excel de :"
+  msg_term_title_odp="Conversion en ODP"
+  msg_first_echo_odp="Conversion en  présentation OpenDocument de :"
+  msg_term_title_pptx="Conversion en pptx"
+  msg_first_echo_pptx="Conversion en présentation PowerPoint de :"
+  msg_term_title_txt="Conversion en TXT"
+  msg_first_echo_txt="Conversion en simple texte de :"
+  msg_term_title_csv="Conversion en CSV"
+  msg_first_echo_csv="Conversion en texte CSV de :"
+  msg_term_title_html="conversion HTML"
+  msg_first_echo_html="Conversion en HTML de :"
+  
+  
+  msg_term_conversion='conversion'
+  msg_term_from='      de :'
+  msg_term_to__='    vers :'
+  
+  #Titre des notifications
+  msg_new_pdfdoc_one="document PDF créé :"
+  msg_new_pdfdoc_many="documents PDF créés :"
+  msg_new_pdfdoc_newdir(){
+  echo "$1 documents PDF créés dans :"
+  }
+  msg_new_html_one="fichier HTML créé :"
+  msg_new_html_many="fichiers HTML créés :"
+  msg_new_txt_one="fichier texte créé :"
+  msg_new_txt_many="fichiers texte créés :"
+  msg_new_odt_one="document ODT créé :"
+  msg_new_odt_many="documents ODT créés :"
+  msg_new_docx_one="document Word créé :"
+  msg_new_docx_many="documents Word créés :"
+  msg_new_ods_one="tableur ODS créé :"
+  msg_new_ods_many="tableurs ODS créés  :"
+  msg_new_xlsx_one="tableur Excel créé :"
+  msg_new_xlsx_many="tableurs Excel créés :"
+  msg_new_odp_one="présentation ODP créée :"
+  msg_new_odp_many="présentations ODP créées :"
+  msg_new_pptx_one="présentation PowerPoint créée :"
+  msg_new_pptx_many="présentations PowerPoint créées :"
+  msg_new_csv_one="fichier CSV créé :"
+  msg_new_csv_many="fichiers CSV créés :"
+  
+  
+  
+  msg_new_print="Impression de : "
+  
+  msg_notification_error_title="Erreurs sur les fichiers"
+  msg_notification_error="Échec de la création des fichiers :"
+  
+  #Nom pour commande en haut à droite des fenêtres de dialogue
+  msg_command="Commande"
+  msg_commands="Commandes"
+  
+  #Titre des barre de progression
+  msg_progress_PDF_title="Conversion en PDF"
+
+  #commons to many windows
+  msg_choose_folder="Dans quel dossier enregistrer les nouveaux fichiers ?"
+  msg_wrong_fields="<span style=\"color: #FF0000;\">Vous avez saisi des champs incorrects, recommencez !</span>"
+  msg_wrong_fields_title="champs incorrects"
+  msg_processing_file="traitement du fichier"
+  msg_terminal_error="Il y a eu des erreurs, appuyez sur une touche pour fermer le terminal"
+  
+  
+  #outputFileNameIt; outputFileNameIt_convert
+  msg_outFile_saveFile_title="Sauver le fichier ..."
+  msg_outFile_unwritable_dir(){
+  echo "$1 n'est pas inscriptible, recommencez !" 
+  }
+  msg_outFile_unwritable_dir_title="Erreur de Permissions"
+  msg_outFile_sameInOut="Le fichier de sortie ne peut pas être le même que le fichier d'entrée. 
+Recommencez !"
+  msg_outFile_sameInOut_title="Même Fichier !"
+  msg_outFile_existingFile(){
+  echo "Le fichier \"$1\" existe déjà. 
+Êtes vous-sûr de vouloir l'écraser ?"
+  }
+  msg_outFile_existingFile_title="Fichier existant"
+  ;;
+  * )
+    false
+esac
+}
+################################################
+
+
+#for sed substitution, input (in sed 's/x/y/')
+meta_zap_in(){
+    echo "$1"|sed 's/\\/\\\\/g' |sed -e 's/\^/\\^/g' -e 's/\$/\\$/g' -e 's/\./\\./g' -e 's/\*/\\*/g' -e 's/\[/\\[/g' -e 's/\]/\\]/g' -e 's/\//\\\//g'
+}
+
+#for sed substitution, output
+meta_zap_out(){
+    echo "$1"|sed 's/\\/\\\\/g'|sed -e 's|/|\\/|g' -e 's/&/\\&/g' 
+}
+
+#prevent html code
+meta_H(){
+    echo "$1"|sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' 
+}
+
+tabstolines(){
+    for arg;do
+        echo "$arg"
+    done
+}
+
+#kreadconfig
+krc(){
+    kreadconfig --file "$ScriptConfigFile" --group "$1" --key "$2"
+}
+
+#kwriteconfig
+kwc(){
+    kwriteconfig --file "$ScriptConfigFile" --group "$1" --key "$2" "$3"
+}
+
+#kdialog, for less text and always attach to terminal
+kdial(){
+    DialTitle="$1"
+    shift
+    kdialog --attach "$Winid" --caption "$DialTitle" --title "$DialTitle" "$@" 2>/dev/null
+}
+
+dependencies(){
+    #$1:text on window
+    #:$2-$3-*:executables
+    dependencies_text="$1"
+    shift
+    if ! which "$@" >/dev/null;then
+        kdial "$msg_depend_title" --sorry "$dependencies_text"
+        exit 1
+    fi
+}
+
+msg_command_total_it(){
+    case $# in
+        1 )
+            msg_command_total="<small><div align=\"right\"><i> $msg_command : $1 </i><hr /></div></small>" ;;
+        * )
+            msg_command_total="<small><div align=\"right\"><i> $msg_commands : $@ </i><hr /></div></small>"
+    esac
+}
+
+burstDirIt(){
+    #$1:outputDir
+    #$2:complete file
+    #$3:text to put between '()'
+    DirName="$(echo "${2##*/}"|sed -e 's/\.pdf$//i' -e 's/\.ps$//i') ($3)"
+    TmpVar="$DirName"
+    Ct=1
+
+    while [ -e "$1/$TmpVar" ];do
+        TmpVar="$DirName ($Ct)"
+        ((Ct++))
+    done
+        
+    DirName="$TmpVar"
+    echo "$1/$DirName"
+
+}
+
+mkdir_for_a_lot(){
+#fonction for making a dir and gives to output file the same name as original
+#$1:message to put between '()'
+
+if $AlotOfFiles;then
+    outputDir="$outputDir/PDFs ($1)"
+    TmpVar="$outputDir"
+    ct=1
+    while [ -e "$TmpVar" ];do
+        TmpVar="$outputDir ($ct)"
+        ((ct++))
+    done
+    
+    outputDir="$TmpVar"
+    mkdir "$outputDir"
+    LotOfFiles_in_a_new_dir=true
+fi
+}
+
+#Mute fonction ( if you want to echo something: echo whattoecho >/dev/stderr )
+#get output file name
+outputFileNameIt(){
+#$1: Complete input file name
+#$2: note between '()' to write in output file name
+
+    if $LotOfFiles_in_a_new_dir ;then
+        outFile="$outputDir/${1##*/}"
+    else
+        outFile="$outputDir/$(echo "${1##*/}"|sed 's/\.pdf$//'|sed "s/$/ ($2).pdf/")"
+        #Rename output file name if file already exists
+        Ct=1
+        TmpVar="$outFile"
+        
+        while [ -e "$TmpVar" ];do
+            TmpVar=$(echo "$outFile"|sed 's/\.pdf$//'|sed "s/$/ ($Ct).pdf/")
+            Ct=$(($Ct+1))
+        done
+        
+        outFile="$TmpVar"
+    fi
+    
+        #Dialog box to rename output file, only if there is only one file
+    if $Onlyonefile;then
+        TmpVar=$(echo "$outFile" |sed "s/\"/'/g")
+    
+        ExitLoop=false
+        until $ExitLoop;do
+            outFile=$(kdial "${msg_outFile_saveFile_title}" --icon document-save --getsavefilename "$TmpVar" application/pdf )\
+                    || return 1
+            if [[ "$outFile" == "$1" ]];then
+                kdial "$msg_outFile_sameInOut_title" --sorry "$msg_outFile_sameInOut"
+            elif [ ! -w "${outFile%/*}" ];then
+                kdial "$msg_outFile_unwritable_dir_title" --sorry "$(msg_outFile_unwritable_dir "${outFile%/*}")"
+            elif [ -e "$outFile" ];then
+                kdial "$msg_outFile_existingFile_title" --dontagain $ScriptConfigFile:OverwriteExistingFile --warningcontinuecancel "$(msg_outFile_existingFile "$outFile")" && ExitLoop=true
+            else
+                ExitLoop=true
+            fi
+        done
+    fi
+    
+    echo "$outFile"
+}
+
+#Mute fonction ( if you want to echo something: echo whattoecho >/dev/stderr )
+#get output file name
+outputFileNameIt_convert(){
+
+#$1: Complete input file name
+#$2: extension
+#$3: type MIME
+#$4: Number between filename and extension (for convert to images) ##
+    
+    InFileBase="${1##*/}"
+    outFile="$outputDir/${InFileBase%.*}"
+    [ -n "$2" ] && outFile=$(echo "$outFile"|sed "s/$/.$2/")
+
+    #Rename output file name if file already exists
+    Ct=1
+    TmpVar="$outFile"
+    while [ -e "$TmpVar" ];do
+        TmpVar=$(echo "$outFile"|sed "s/\.$2$//"|sed "s/$/ ($Ct).$2/")
+        ((Ct++))
+    done
+    
+    outFile="$TmpVar"
+    echo "$outFile"
+} 
+    
+
+exit_function_many(){
+    progress_dialog close
+    notification_dialog $1
+    exit 0
+}
+
+progress_dialog(){
+    if $AlotOfFiles;then
+        case $1 in
+            open )
+                Cal=1
+                ProgressPDF=$(kdialog --caption "$Progress_Title" --title "$Progress_Title" --progressbar "$msg_processing_file $Cal/$HowManyArgs" $HowManyArgs 2>/dev/null)
+                qdbus $ProgressPDF showCancelButton true >/dev/null
+                ;;
+            checkcancel )
+                #$2:For Notification
+                #$3_4_*:files or dirs to remove
+                if $(qdbus $ProgressPDF wasCancelled);then
+                    qdbus $ProgressPDF close >/dev/null
+                    notification_dialog $2
+                    rm -R "$3"
+                    exit 0
+                elif ! qdbus|grep -q ${ProgressPDF%/*};then
+                    ProgressPDF=$(kdialog --caption "$Progress_Title" --title "$Progress_Title" --progressbar "$msg_processing_file $Cal/$HowManyArgs" $HowManyArgs 2>/dev/null)
+                    qdbus $ProgressPDF showCancelButton true >/dev/null
+                    qdbus $ProgressPDF value $Cal >/dev/null
+                fi
+                qdbus $ProgressPDF setLabelText "$msg_processing_file $Cal/$HowManyArgs" >/dev/null
+                ;;
+            end )
+                qdbus $ProgressPDF value $Cal >/dev/null
+                ((Cal++))
+                if $(qdbus $ProgressPDF wasCancelled);then
+                    qdbus $ProgressPDF close >/dev/null
+                    notification_dialog $2
+                    exit 0
+                elif ! qdbus|grep -q ${ProgressPDF%/*};then
+                    ProgressPDF=$(kdialog --caption "$Progress_Title" --title "$Progress_Title" --progressbar "$msg_processing_file $Cal/$HowManyArgs" $HowManyArgs 2>/dev/null)
+                    qdbus $ProgressPDF showCancelButton true >/dev/null
+                    qdbus $ProgressPDF value $Cal >/dev/null
+                fi
+                [ $Cal -le $HowManyArgs ] && qdbus $ProgressPDF setLabelText "$msg_processing_file $Cal/$HowManyArgs" >/dev/null
+                ;;
+            close )
+                qdbus $ProgressPDF close >/dev/null
+        esac
+    fi
+}
+
+DialogNotIt(){
+    PrettyFile=$(meta_H "$2"|sed "s/^$(meta_zap_in "$HOME")\//~\//")
+    
+    case $1 in
+        0 )
+            NotiFiles=$(echo "$NotiFiles"$'\n'"$PrettyFile"|sed '/^$/d')
+            ;;
+        * )
+#             ErrorNotiFiles=$(echo "$ErrorNotiFiles"|sed "$ s/$/\n$(meta_zap_out "$PrettyFile")/" |sed '/^$/d')
+            ErrorNotiFiles="$ErrorNotiFiles"$'\n'"$PrettyFile"
+            
+            if [ -n "$4" ];then
+                FullErrorDetails="$FullErrorDetails"$'\n'"from : $3"$'\n'"to : $2"$'\n'"via : $4"$'\n'$'\n'"$ErrorDetails"$'\n'$'\n'
+            else
+                FullErrorDetails="$FullErrorDetails"$'\n'"from : $3"$'\n'"to : $2"$'\n'$'\n'"$ErrorDetails"$'\n'$'\n'
+            fi
+            
+            unset ErrorDetails
+    esac
+}
+
+notification_dialog(){
+  
+    if [ -n "$NotiFiles" ];then
+        NL=$(echo "$NotiFiles"|wc -l)
+        
+        case $1 in
+            pdf )
+                KNTitleMany="$msg_new_pdfdoc_many"
+                KNTitle="$msg_new_pdfdoc_one"
+                NotiIcon=application-pdf
+            ;;
+            odt )
+                KNTitleMany="$msg_new_odt_many"
+                KNTitle="$msg_new_odt_one"
+                NotiIcon=application-vnd.oasis.opendocument.text
+            ;;
+            docx )
+                KNTitleMany="$msg_new_docx_many"
+                KNTitle="$msg_new_docx_one"
+                NotiIcon=application-vnd.openxmlformats-officedocument.wordprocessingml.document
+                ;;
+            ods )
+                KNTitleMany="$msg_new_ods_many"
+                KNTitle="$msg_new_ods_one"
+                NotiIcon=application-vnd.oasis.opendocument.spreadsheet
+                ;;
+            xlsx )
+                KNTitleMany="$msg_new_xlsx_many"
+                KNTitle="$msg_new_xlsx_one"
+                NotiIcon=application-x-applix-spreadsheet
+                ;;
+            odp )
+                KNTitleMany="$msg_new_odp_many"
+                KNTitle="$msg_new_odp_one"
+                NotiIcon=application-vnd.oasis.opendocument.presentation
+                ;;
+            pptx )
+                KNTitleMany="$msg_new_pptx_many"
+                KNTitle="$msg_new_pptx_one"
+                NotiIcon=application-vnd.oasis.opendocument.presentation
+                ;;
+            csv )
+                KNTitleMany="$msg_new_csv_many"
+                KNTitle="$msg_new_csv_one"
+                NotiIcon=text-csv
+                ;;
+            html )
+                KNTitleMany="$msg_new_html_many"
+                KNTitle="$msg_new_html_one"
+                NotiIcon=text-html
+                ;;
+            txt )
+                KNTitleMany="$msg_new_txt_many"
+                KNTitle="$msg_new_txt_one"
+                NotiIcon=text-plain
+                ;;
+            print )
+                KNTitle="$msg_new_print"
+                NotiIcon=document-print
+                ;;
+        esac
+        
+        [ -z "$KNTitleMany" ] && KNTitleMany="$KNTitle"
+        [ $NL -gt 1 ] && KNTitle="$KNTitleMany"
+        
+        echo NL=$NL
+        
+        if [ -x "$DataDir/notifier.py" ];then
+            "$DataDir/notifier.py" --icon "$NotiIcon" --title "$KNTitle" --text "$NotiFiles"
+        else
+            kdialog --icon "$NotiIcon" --title "$KNTitle" --passivepopup "$NotiFiles" 3 2>/dev/null
+        fi
+    fi
+    
+    if [ -n "$ErrorNotiFiles" ];then
+        kdial "$msg_notification_error_title" --detailederror "$msg_notification_error"$'\n'"$ErrorNotiFiles" "$FullErrorDetails"
+    fi
+  
+}
+
+
+
+#################################################################################################################################################################################################################################################################################################################################
+
+convert_it(){
+    outExtension=$1
+    shift
+    
+    case $outExtension in
+        pdf )
+            Progress_Title="$msg_progress_PDF_title"
+            outMime=application/pdf
+        ;;
+        odt )
+            Progress_Title="$msg_term_title_odt"
+            outMime=application/vnd.oasis.opendocument.text
+        ;;
+        docx )
+            Progress_Title="$msg_term_title_docx"
+            outMime=application/vnd.openxmlformats-officedocument.wordprocessingml.document
+        ;;
+        ods )
+            Progress_Title="$msg_term_title_ods"
+            outMime=application/vnd.oasis.opendocument.spreadsheet
+        ;;
+        xlsx )
+            Progress_Title="$msg_term_title_xlsx"
+            outMime=application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        ;;
+        odp )
+            Progress_Title="$msg_term_title_odp"
+            outMime=application/vnd.oasis.opendocument.presentation
+        ;;
+        pptx )
+            Progress_Title="$msg_term_title_pptx"
+            outMime=application/vnd.openxmlformats-officedocument.presentationml.presentation
+        ;;
+        html )
+            Progress_Title="$msg_term_title_html"
+            outMime=text/html
+        ;;
+        txt )
+            Progress_Title="$msg_term_title_txt"
+            outMime=text/plain
+        ;;
+        csv )
+            Progress_Title="$msg_term_title_csv"
+            outMime=text/csv
+        ;;
+    esac
+            
+    progress_dialog open
+    
+    until [ $# = 0 ];do
+    
+        InFileBase="${1##*/}"
+        outFile="$outputDir/${InFileBase%.*}.$outExtension"
+        outputFileName=$(outputFileNameIt_convert "$1" $outExtension $outMime)
+        
+        if [ -f "$outFile" ];then
+            TmpFile=$(mktemp)
+            cp -f "$outFile" "$TmpFile"
+            echo "$msg_term_conversion"
+            echo "$msg_term_from $1"
+            echo "$msg_term_to__ $outputFileName"
+            ErrorDetails=$(libreoffice --headless --invisible -env:UserInstallation=file:///tmp/LibO_Conversion \
+                           --convert-to $outExtension --outdir "$outputDir" "$1" 2>&1)
+            
+            if echo "$ErrorDetails"|grep -q ^"Error:";then
+                rm "$TmpFile"
+            else
+                mv -f "$outFile" "$outputFileName"
+                mv "$TmpFile" "$outFile"
+            fi
+        else
+            echo "$msg_term_conversion"
+            echo "$msg_term_from $1"
+            echo "$msg_term_to__ $outFile"
+            ErrorDetails=$(libreoffice --headless --invisible -env:UserInstallation=file:///tmp/LibO_Conversion \
+                           --convert-to $outExtension --outdir "$outputDir" "$1" 2>&1)
+        fi
+        
+        if echo "$ErrorDetails"|grep -q ^"Error:";then
+            ReturnCode=1
+        else
+            ReturnCode=0
+        fi
+        
+        DialogNotIt $ReturnCode "$outputFileName" "$1"
+        
+        progress_dialog end
+        
+        echo ""
+        
+        shift
+    done
+        
+#     read anything
+    
+    #remove tmp dir created for new libreoffice instance
+    rm -rf /tmp/LibO_Conversion
+    progress_dialog close
+    notification_dialog $outExtension
+}  
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+main (){
+    #$1:action
+
+    action="$1"
+    shift
+
+    Onlyonefile=false
+    [ $# = 1 ] && Onlyonefile=true
+
+    AlotOfFiles=false
+    [ $# -ge 5 ] && AlotOfFiles=true
+    HowManyArgs=$#
+
+    $InKonsole && Winid="$WINDOWID" || Winid=""
+
+    echo ""
+
+    case "$action" in
+        convert_pdf )
+            konsole_title="$msg_term_title_PDF"
+            echo "$msg_first_echo_PDF"
+            ;;
+        convert_odt )
+            konsole_title="$msg_term_title_odt"
+            echo "$msg_first_echo_odt"
+            ;;
+        convert_docx)
+            konsole_title="$msg_term_title_docx"
+            echo "$msg_first_echo_docx"
+            ;;
+        convert_ods )
+            konsole_title="$msg_term_title_ods"
+            echo "$msg_first_echo_ods"
+            ;;
+        convert_xlsx )
+            konsole_title="$msg_term_title_xlsx"
+            echo "$msg_first_echo_xlsx"
+            ;;
+        convert_odp )
+            konsole_title="$msg_term_title_odp"
+            echo "$msg_first_echo_odp"
+            ;;
+        convert_pptx )
+            konsole_title="$msg_term_title_pptx"
+            echo "$msg_first_echo_pptx"
+            ;;
+        convert_txt )
+            konsole_title="$msg_term_title_txt"
+            echo "$msg_first_echo_txt"
+            ;;
+        convert_csv )
+            konsole_title="$msg_term_title_csv"
+            echo "$msg_first_echo_csv"
+            ;;
+        convert_html )
+            konsole_title="$msg_term_title_html"
+            echo "$msg_first_echo_html"
+            ;;
+    esac
+    
+    $InKonsole && qdbus org.kde.konsole $KONSOLE_DBUS_SESSION setTitle 1 "$konsole_title" &>/dev/null
+
+    Ct=1
+    until [ $# = 0 ];do
+        #if script is launch from terminal, get fullpath of files
+        FileArg[$Ct]=$(readlink -e "$1")
+    
+        ManyInputDirs=false
+        [ -z "$InputDir" ] && InputDir="${FileArg[$Ct]%/*}"
+        [[ "${FileArg[$Ct]%/*}" == "$InputDir" ]] || ManyInputDirs=true
+
+        if $ManyInputDirs;then
+            [ -z "$CommonDir" ] && CommonDir="${FileArg[$Ct]%/*}"
+            
+            until [[ "${FileArg[$Ct]}" =~ ^"$CommonDir/" ]];do
+                CommonDir="${CommonDir%/*}"
+            done
+        fi
+
+        ((Ct++))
+        shift
+    done
+
+    #get all files one many lines for the first echo
+    AllFilesInLines=$(tabstolines "${FileArg[@]}"|sed "s/^$(meta_zap_in "$HOME")\//~\//")
+    echo "$AllFilesInLines"
+    echo ""
+
+    case $action in
+        info |fonts )
+            true  ;;
+        * )
+        
+            #Mute fonction, choose output directory ( if you want to echo something: echo whattoecho >/dev/stderr )
+            outputDirIt(){
+                outputDir=""
+                
+                until [ -w "$outputDir" ];do
+                    outputDir=$(kdial "$msg_choose_folder" --getexistingdirectory "$1") || return 1
+                    if [ ! -w "$outputDir" ];then
+                        kdial "$msg_outFile_unwritable_dir_title" --error "$(msg_outFile_unwritable_dir "$outputDir")"
+                    fi
+                done
+                
+                echo "$outputDir"
+            }
+                
+            if $ManyInputDirs;then 
+                outputDir=$(outputDirIt "$CommonDir") || exit 0
+            else
+                outputDir=$(dirname "${FileArg[1]}")
+                if [ ! -w "$outputDir" ];then
+                    outputDir=$(outputDirIt "$HOME") || exit 0
+                fi
+            fi
+    esac
+    
+#     case "$action" in
+#         left | right | overturn | restore | repair | unlock | compress | uncompress )
+#             normal_pdftk "$action" "${FileArg[@]}"
+#             ;;
+#         optimize_crypt )
+#             optimize //crypt "${FileArg[@]}" 
+#             ;;
+#         convert_ppm |convert_png |convert_jpeg |convert_jpeggray|convert_tiff)
+#             ChooseFormat=$(echo "$action"|sed 's/convert_/\/\//')
+#             convert_image $ChooseFormat "${FileArg[@]}"
+#             ;;
+#         * )
+#             "$action" "${FileArg[@]}"
+#     esac
+    convert_it ${action##*_} "${FileArg[@]}"
+    
+}
+
+
+####Script start
+
+
+ScriptConfigFile="OfficeConverterrc"
+LotOfFiles_in_a_new_dir=false
+InKonsole=false
+RmTmpFile=false
+
+InstallPath=('/usr' '/usr/local' "$HOME/.local")
+
+for InstallDir in "${InstallPath[@]}";do
+    [ -d "$InstallDir/share/OfficeConverterSM" ] && DataDir="$InstallDir/share/OfficeConverterSM"
+done
+
+if [ -z "$DataDir" ];then
+    kdial "Missing Files" --sorry "Missing Data Dir OfficeConverterSM in ${InstallPath[*]}"
+    exit 1
+fi
+    
+
+# dependencies "$msg_depend_pdftk_poppler" pdftk pdfinfo
+  
+dependencies "la commande libreoffice est requise !" libreoffice
+
+
+#to lanch konsole
+case "$1" in
+    //konsole )
+        InKonsole=true
+        shift
+esac
+
+
+#language choose
+case "$1" in
+    -la)
+        shift
+        lang=$(echo "$1" | sed -e "s/@//g")
+        shift
+        ;;
+    *)
+        lang=$(echo "$LANG"|sed 's/_.*//')
+        [ -z "$lang" ] && lang=en
+esac
+
+
+action="$1"
+shift
+
+#launch script in konsole if script isn't launch from konsole
+if ! $InKonsole && [ -z "$KONSOLE_DBUS_SESSION" ] ;then
+    case "$action" in
+        * )
+            konsole --hide-tabbar --hide-menubar -p BlinkingCursorEnabled=true -e "$0" //konsole -la "$lang" "$action" "$@" 2>/dev/null
+            exit 0
+    esac
+fi
+
+load_language en
+load_language $lang
+
+main "$action" "$@"
+
+exit 0

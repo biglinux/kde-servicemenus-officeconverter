@@ -1,0 +1,31 @@
+[Desktop Entry]
+Actions=06ODP;
+Icon=application-vnd.oasis.opendocument.presentation
+MimeType=application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;
+Name[fr]=Service-Menu ODP convert
+Name=convert ODP service menu
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Submenu[fr]=Convertir en
+X-KDE-Submenu=Convert to
+X-KDE-Submenu[es]=Convertir a
+X-KDE-Submenu[it]=Converti in
+X-KDE-Submenu[ru]=&Преобразовать в
+
+[Desktop Action 06ODP]
+Exec=officeconverter_servicemenu -la en convert_odp %F
+Exec[fr]=officeconverter_servicemenu -la fr convert_odp %F
+Icon=application-vnd.oasis.opendocument.presentation
+Name=ODP
+Name[fr]=ODP
+
+
+# #docs
+# application/vnd.oasis.opendocument.text;application/msword;application/vnd.ms-word;application/vnd.openxmlformats-officedocument.wordprocessingml.document;
+# 
+# #sheets
+# application/vnd.oasis.opendocument.spreadsheet;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;
+# 
+# #presentations
+# application/vnd.oasis.opendocument.presentation;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;
+

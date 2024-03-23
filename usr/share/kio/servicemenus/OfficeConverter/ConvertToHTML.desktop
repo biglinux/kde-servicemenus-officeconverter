@@ -1,0 +1,30 @@
+[Desktop Entry]
+Actions=10HTML;
+Icon=text-html
+MimeType=text/plain;text/csv;application/vnd.oasis.opendocument.text;application/msword;application/vnd.ms-word;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.oasis.opendocument.spreadsheet;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.oasis.opendocument.presentation;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;
+Name=convert HTML service menu
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Submenu[fr]=Convertir en
+X-KDE-Submenu=Convert to
+X-KDE-Submenu[es]=Convertir a
+X-KDE-Submenu[it]=Converti in
+X-KDE-Submenu[ru]=&Преобразовать в
+
+[Desktop Action 10HTML]
+Exec=officeconverter_servicemenu -la en convert_html %F
+Exec[fr]=officeconverter_servicemenu -la fr convert_html %F
+Icon=text-html
+Name=HTML
+Name[fr]=HTML
+
+
+# #docs
+# application/vnd.oasis.opendocument.text;application/msword;application/vnd.ms-word;application/vnd.openxmlformats-officedocument.wordprocessingml.document;
+# 
+# #sheets
+# application/vnd.oasis.opendocument.spreadsheet;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;
+# 
+# #presentations
+# application/vnd.oasis.opendocument.presentation;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;
+

@@ -1,8 +1,8 @@
 # Maintainer: Barnabé di Kartola <barnabedikartola@gmail.com>
 
-pkgname=biglinux-package-template
-pkgdesc="Package template for biglinux"
-# depends=('')
+pkgname=kde-servicemenus-officeconverter
+pkgdesc="KDE service menus for converting documents from dolphin"
+depends=('libreoffice' 'dolphin' 'kdialog' )
 # makedepends=('')
 # conflicts=('')
 pkgver=$(date +%y.%m.%d)
